@@ -130,13 +130,13 @@ class DataProcessor:
             df = df.replace("Unknown",np.nan)
 
             def getAnimeName(anime_id):
-                    try:
-                        name = df[df.anime_id == anime_id].eng_version.values[0]
-                        if name is np.nan:
-                            name = df[df.anime_id == anime_id].Name.values[0]
-                    except:
-                        print("Error")
-                        return name
+                try:
+                    name = df[df.anime_id == anime_id].eng_version.values[0]
+                    if name is np.nan:
+                        name = df[df.anime_id == anime_id].Name.values[0]
+                except:
+                    print("Error")
+                return name
                 
             df["anime_id"] = df["MAL_ID"]
             df["eng_version"] = df["English name"]
@@ -148,7 +148,7 @@ class DataProcessor:
                     kind="quicksort",
                     na_position="last")
                 
-            df = df[["anime_id" , "eng_version","Score","Genres","Episodes","Type","Premiered","Members"]]
+            df = df[["anime_id" ,"eng_version","Score","Genres","Episodes","Type","Premiered","Members"]]
 
             df.to_csv(DF,index=False)
             synopsis_df.to_csv(SYNOPSIS_DF,index=False)
